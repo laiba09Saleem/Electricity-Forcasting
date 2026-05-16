@@ -2,6 +2,9 @@
 
 VoltCast Pro is an end-to-end industry-standard web application designed to forecast electricity demand. It leverages Deep Learning (LSTM), FastAPI, and Streamlit to provide real-time analytical insights and multi-step forecasting using ENTSO-E data.
 
+## Live Demo: https://voltcastpro.streamlit.app/
+
+
 ## 🚀 Features
 - **Predictive Engine:** PyTorch-based LSTM model for 24-hour load forecasting.
 - **Interactive Dashboard:** Premium Streamlit UI with Plotly visualizations.
@@ -30,8 +33,8 @@ VoltCast Pro is an end-to-end industry-standard web application designed to fore
 
 1. **Clone the repository:**
    ```bash
-   git clone [YOUR_REPO_URL]
-   cd electricity-load-forecasting
+   git clone https://github.com/laiba09Saleem/Electricity-Forecas.git
+   cd electricity_forcasting
    ```
 
 2. **Create Virtual Environment:**
