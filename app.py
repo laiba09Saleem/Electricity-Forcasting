@@ -82,7 +82,7 @@ def get_eda(params):
     except:
         return None
 with st.sidebar:
-    st.image("logo.png", width=120) 
+    st.image("logo.png", width=200) 
     st.title("VoltCast Pro")
     st.subheader("Configuration")
     country = st.selectbox("Market Region", ["DE (Germany)","FR (France)","GB (Great Britain)","ES (Spain)","IT (Italy)"])
