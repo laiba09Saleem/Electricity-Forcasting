@@ -27,31 +27,31 @@ def prepare_data(df):
     return torch.FloatTensor(np.array(X)), torch.FloatTensor(np.array(y)), scaler
 
 def train():
-    logger.info("🚀 INITIALIZING PROFESSIONAL TRAINING PIPELINE")
+    logger.info("[INIT] INITIALIZING PROFESSIONAL TRAINING PIPELINE")
     
     # 1. Fetch Data
     try:
-        logger.info("📥 Fetching historical data...")
+        logger.info("[DATA] Fetching historical data...")
         # For training, we just use the local dataset if available
         df = fetch_load_data("DE", "20230101", "20230301")
     except Exception as e:
-        logger.error("❌ Failed to fetch data: %s", str(e))
+        logger.error("[ERROR] Failed to fetch data: %s", str(e))
         return
 
     # 2. Prepare Data
-    logger.info("📊 Preprocessing data (Scaling & Windowing)...")
+    logger.info("[DATA] Preprocessing data (Scaling & Windowing)...")
     X, y, scaler = prepare_data(df)
     dataset = torch.utils.data.TensorDataset(X, y)
     loader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
     
     # 3. Initialize Model
-    logger.info("🤖 Building LSTM architecture (Layers: 2, Hidden: 64)...")
+    logger.info("[MODEL] Building LSTM architecture (Layers: 2, Hidden: 64)...")
     model = LSTMForecaster(output_dim=Config.HORIZON)
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     
     # 4. Training Loop
-    logger.info("🔥 Starting Training Loop...")
+    logger.info("[TRAIN] Starting Training Loop...")
     model.train()
     epochs = 10
     for epoch in range(epochs):
@@ -67,13 +67,13 @@ def train():
         logger.info(f"Epoch [{epoch+1}/{epochs}] | Avg MSE Loss: {total_loss/len(loader):.6f}")
         
     # 5. Export Artifacts
-    logger.info("💾 Exporting model artifacts to 'models/' folder...")
+    logger.info("[EXPORT] Exporting model artifacts to 'models/' folder...")
     os.makedirs(os.path.dirname(Config.MODEL_PATH), exist_ok=True)
     torch.save(model.state_dict(), Config.MODEL_PATH)
     with open(Config.SCALER_PATH, 'wb') as f:
         pickle.dump(scaler, f)
         
-    logger.info("✅ SUCCESS: Professional model trained and deployed.")
+    logger.info("[SUCCESS] Professional model trained and deployed.")
 
 if __name__ == "__main__":
     train()
